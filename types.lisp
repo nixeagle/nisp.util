@@ -5,9 +5,14 @@
            type-specifier
            #:class-symbol-p
            class-symbol
+           positive-fixnum
            structure-designator))
 (in-package :nisp.util-types)
- 
+
+(deftype positive-fixnum ()
+  "A fixnum"
+  `(integer 1 ,most-positive-fixnum))
+
 ;; Idea for (documentation symbol 'type) taken from slime.lisp
 (defun type-specifier-p (symbol)
   "True if SYMBOL is a type."
