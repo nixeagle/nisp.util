@@ -4,6 +4,13 @@
   (:nicknames :ua))
 (in-package :nisp.util-alpha)
 
+(defun print-list-for-org-mode (list &optional (stream t) (prefix "  - "))
+  "Print LIST to STREAM with PREFIX prepended to each item."
+  (apply #'concatenate 'string
+         (mapcan (lambda (x)
+                   (list (format stream "~A~S~%" prefix x)))
+                 list)))
+
 (defmacro repeated-clock (form &key (from 0)
                           (exponent-base 11/10)
                           (record-above-time 1/1000)
