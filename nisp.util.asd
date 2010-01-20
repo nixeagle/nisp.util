@@ -12,6 +12,7 @@
   :license "GPLv3 or later"
   :description "irc bot"
   :depends-on (:iterate)
+  :serial t
   :components
   ((:file "types")
    (:file "helpers")))
