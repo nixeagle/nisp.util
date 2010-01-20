@@ -3,6 +3,8 @@
   (:use :common-lisp :iterate)
   (:export #:type-specifier-p
            type-specifier
+           #:class-symbol-p
+           class-symbol
            structure-designator))
 (in-package :nisp.util-types)
 
@@ -18,6 +20,14 @@
 (deftype type-specifier ()
   "Type specifier that can be used with TYPEP"
   '(satisfies type-specifier-p))
+
+(defun class-symbol-p (symbol)
+  "Return t if SYMBOL identifies a class."
+  (if (find-class symbol nil) t))
+
+(deftype class-symbol ()
+  "Symbol that identifies a class."
+  '(and symbol (satisfies class-symbol-p)))
 
 (deftype structure-designator ()
   '(or symbol structure-class structure-object))
