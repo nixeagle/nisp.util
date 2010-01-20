@@ -3,9 +3,11 @@
   (:use :common-lisp :iterate)
   (:export #:type-specifier-p
            type-specifier
+           #:class-symbol-p
+           class-symbol
            structure-designator))
 (in-package :nisp.util-types)
-
+ 
 ;; Idea for (documentation symbol 'type) taken from slime.lisp
 (defun type-specifier-p (symbol)
   "True if SYMBOL is a type."
