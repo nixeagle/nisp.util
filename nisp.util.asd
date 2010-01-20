@@ -13,4 +13,5 @@
   :description "irc bot"
   :depends-on (:iterate)
   :components
-  ((:file "types")))
+  ((:file "types")
+   (:file "helpers")))
