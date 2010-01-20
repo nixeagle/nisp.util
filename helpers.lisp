@@ -20,7 +20,7 @@
         (collect symbol)
         (unintern symbol from-package)))
 
-(defmacro clock (form &optional (iterations 10000))
+(defmacro clock (form &optional (iterations 10000) (_count_ 0))
   "Execute FORM ITERATIONS times.
 
 The result is an alist of the form:
@@ -34,7 +34,7 @@ The result is an alist of the form:
         (total (gensym))
         (avg (gensym)))
     `(iter (with ,start = (get-internal-real-time))
-            (for ,(gensym) :from 0 :to ,iterations)
+            (for _count_ :from 0 :to ,iterations)
             ,form
             (finally (let* ((,total (the (or (integer 0 0) positive-fixnum) 
                                       (- (get-internal-real-time) ,start)))
