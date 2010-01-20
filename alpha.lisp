@@ -11,6 +11,12 @@
                    (list (format stream "~A~S~%" prefix x)))
                  list)))
 
+(defun package-classes (package)
+  "List all classes defined in PACKAGE."
+  (iter (for symbol :in-package package :external-only t)
+        (when (find-class symbol nil)
+          (collect symbol))))
+
 (defmacro repeated-clock (form &key (from 0)
                           (exponent-base 11/10)
                           (record-above-time 1/1000)
