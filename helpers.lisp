@@ -1,6 +1,7 @@
 (in-package :nisp.util-system)
 (defpackage #:nisp.util-helpers
-  (:use :common-lisp :iterate))
+  (:use :common-lisp :iterate)
+  (:nicknames :h :helpers))
 (in-package :nisp.util-helpers)
 
 (defun export-some-internals (package-name)
