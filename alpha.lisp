@@ -96,3 +96,15 @@
    (caddar (closer-mop:class-direct-default-initargs
            class))))
 
+
+(in-package :cl-user)
+(defpackage #:nisp-util-user
+  (:use :cl :closer-mop :iterate :nisp.util-types)
+  (:nicknames :nuu)
+  (:shadowing-import-from :closer-mop
+                          :defmethod :defgeneric
+                          :generic-function :standard-generic-function))
+(in-package :nisp-util-user)
+
+
+;;; end file
