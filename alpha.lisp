@@ -82,3 +82,17 @@
 ;;            (optimize (debug 0) (safety 0) (speed 3) (space 1)))
 ;;   `(with-output-to-string (*trace-output*)
 ;;      (time ,count ,@body)))
+
+
+
+;;;;;;
+;;;;MOP related utilities
+(defun call-class-default-initarg (class slot-name)
+  "Call SLOT-NAME's default init function for CLASS."
+  ;; NOT IMPLEMENTED fully. We just get the default value for the first
+  ;; slot in the list paying no heed to SLOT-NAME.
+  (declare (ignore slot-name))
+  (funcall 
+   (caddar (closer-mop:class-direct-default-initargs
+           class))))
+
