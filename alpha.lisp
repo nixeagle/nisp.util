@@ -96,6 +96,8 @@
    (caddar (closer-mop:class-direct-default-initargs
            class))))
 
+(defgeneric superclasses (object)
+  (:documentation "Return direct superclasses and all superclasses."))
 
 (in-package :cl-user)
 (defpackage #:nisp-util-user
