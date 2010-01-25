@@ -15,4 +15,5 @@
   :serial t
   :components
   ((:file "types")
+   (:file "util-protocol")
    (:file "helpers")))
