@@ -12,13 +12,13 @@
           (export symbol package-name)
           (collect symbol))))
 
-(defun unintern-externals-from (package &optional (from-package *package*))
+(defun unintern-externals-from (package &optional (in-package *package*))
   "Remove all exports from PACKAGE in FROM-PACKAGE."
   (iter (for (symbol)
              :in-packages package
              :having-access (:external))
         (collect symbol)
-        (unintern symbol from-package)))
+        (unintern symbol in-package)))
 
 (defmacro clock (form &optional (iterations 10000) (_count_ 0))
   "Execute FORM ITERATIONS times.
