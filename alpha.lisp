@@ -46,6 +46,19 @@
                                       ,x 
                                       ,iterations
                                       (length ,points)))))))
+
+(defun shlex (string)
+  "Split STRING by spaces, but not splitting spaces between quotes."
+  (iter (with count = 0)
+        (with result = ())
+        (for s :in-string string)
+        (when (member s '(#\" #\'))
+          (incf count))
+        (if (and (evenp count) (char= #\Space s))
+            (progn (push (coerce it 'string) result) (setq it ()))
+            (collect s :into it))
+        (finally (push (coerce it 'string) result) (return (nreverse result)))))
+
 #+ ()
 (defun locate-o-notation (points &optional (accuracy 1) (power 1))
   (let ((interpolate (PH_INTERPOLATION:DIRECT_INTERPOLATION points)))
