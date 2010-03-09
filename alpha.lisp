@@ -47,6 +47,27 @@
                                       ,iterations
                                       (length ,points)))))))
 
+(defmacro repeated-clock (form &optional (times 1000))
+  
+  `(let ((start )) (iterate (repeat ,times)
+              (for ,iterations = (round (expt ,exponent-base ,x)))
+              (for ,result = (h::clock ,form ,iterations))
+              (for ,time = (the (or (integer 0 0) positive-fixnum ratio) 
+                             (cadr (assoc :time ,result))))
+              (sum ,time :into ,total)
+              
+              (when (> ,time ,record-above-time)
+                (collect ,x :into ,points-x)
+                (collect (cons iterations ,time) :into ,points))
+              (collect ,result :into ,results)
+              (until (> ,total ,stop-time))
+              (finally (return (values (cons ,points-x ,points)
+                                       ,results
+                                       ,x 
+                                       ,iterations
+                                       (length ,points)))))))
+
+
 (defun shlex (string)
   "Split STRING by spaces, but not splitting spaces between quotes."
   (iter (with count = 0)
@@ -58,6 +79,15 @@
             (progn (push (coerce it 'string) result) (setq it ()))
             (collect s :into it))
         (finally (push (coerce it 'string) result) (return (nreverse result)))))
+
+(defun shlex (string)
+  "Split STRING by spaces, but not splitting spaces between quotes."
+  (iter (with result = ())
+        (for s :in-string string)
+        (if (char= #\Space s)
+            (progn (push it result) (setq it ()))
+            (collect s :into it))
+        (finally (push it result) (return result))))
 
 #+ ()
 (defun locate-o-notation (points &optional (accuracy 1) (power 1))

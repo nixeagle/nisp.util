@@ -1,6 +1,6 @@
 ;;;; Extra functions
 
-(in-package :nistilities)
+(in-package :nisp-util)
 
 ;;; For the lack of any better place to put these for now...
 ;(setq *test-describe-if-not-successful?* t)
@@ -37,7 +37,7 @@
 
 If NAME is not given assume *package* instead"
   (let ((package (or (find-package name) *package*)))
-    (length (loop 
+    (length (loop
             for s being the symbols of (find-package package)
             collect s))))
 
@@ -60,7 +60,7 @@ but make sure to explain what went wrong in the format string."
         (result (gensym)))
     `(let ((,gpredicate #',predicate))
        (let ((result (funcall ,gpredicate ,form)))
-         (if 
+         (if
           t
           (list ',predicate ',form ,form)))))
   )
